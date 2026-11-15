@@ -1,0 +1,46 @@
+name: validate-relay
+
+# Validates AI relay drops landing in proposals/, checkpoints/, tasks/.
+# Validates ONLY — never executes payload content. Data leaves as data.
+
+on:
+  push:
+    paths:
+      - "proposals/**"
+      - "checkpoints/**"
+      - "tasks/**"
+  pull_request:
+    paths:
+      - "proposals/**"
+      - "checkpoints/**"
+      - "tasks/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Validate relays (front matter, secrets, URLs, executable payloads)
+        run: |
+          python3 .github/scripts/validate_relay.py || {
+            echo "::error::Relay validation failed - see job log. Payload was NOT executed."
+            exit 1
+          }
+
+      - name: Report summary
+        if: always()
+        run: |
+          {
+            echo "## Relay validation"
+            echo "- Scope: proposals/, checkpoints/, tasks/ (data-only drops)"
+            echo "- Checks: front-matter schema, secret scan, URL allowlist, executable-payload scan"
+            echo "- Policy: validation NEVER executes relay content"
+          } >> "$GITHUB_STEP_SUMMARY"
