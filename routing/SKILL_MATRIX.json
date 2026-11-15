@@ -1,0 +1,69 @@
+{
+  "title": "AcidWurx Multi-AI Skill Matrix",
+  "version": "0.1.0",
+  "updated_utc": "2026-11-15T14:26:26Z",
+  "routing_rules": [
+    {
+      "platform": "google-ai-search",
+      "role": "STAGE_0_LEAD_ARCHITECT_AND_RESEARCH_PLANNER",
+      "strengths": [
+        "initial stage mapping with strict Verification Gates",
+        "research task planning and dispatch into TASKS_DISPATCH.md",
+        "live documentation grounding and citation",
+        "open-source GitHub repo discovery: llms.txt generators, multi-agent GitHub Action relays, git subtree automation, MCP registries, Generative UI chat frameworks"
+      ],
+      "limits": "none (search-grounded)",
+      "skill_tag": "[SKILL:google-ai-search]",
+      "dispatch_file": "TASKS_DISPATCH.md"
+    },
+    {
+      "platform": "qwen",
+      "role": "UNLIMITED_HEAVY_COMPUTE_AND_SCHEMA_ARCHITECT",
+      "strengths": [
+        "unlimited heavy codebase audits",
+        "refactoring plans",
+        "JSON/YAML schema synthesis",
+        "inference routing tables",
+        "self-improvement loop optimisation"
+      ],
+      "limits": "free chats effectively unlimited; still checkpoint after each dispatched task",
+      "skill_tag": "[SKILL:qwen]"
+    },
+    {
+      "platform": "meta-ai",
+      "role": "DEVOPS_BASH_PACKAGING_ENGINEER",
+      "strengths": [
+        "idempotent Bash/Python scripts",
+        "systemd service units",
+        ".zip deployment bundles"
+      ],
+      "limits": "no filesystem access; output must be paste-ready scripts",
+      "skill_tag": "[SKILL:meta-ai]"
+    },
+    {
+      "platform": "kimi",
+      "role": "CAPPED_SPECIALIST_CRITIC_MULTI_FILE_DEPENDENCY",
+      "strengths": [
+        "deep multi-file dependency analysis within chunked free limits"
+      ],
+      "limits": "read ONLY routing/LEDGER.md plus one assigned micro-task; <3500 tokens total; emit REASSIGN_NEXT_ACCOUNT when near daily free limit",
+      "skill_tag": "[SKILL:kimi]"
+    },
+    {
+      "platform": "claude",
+      "role": "CAPPED_SPECIALIST_CRITIC_ARCHITECTURE_SECURITY",
+      "strengths": [
+        "architecture critique",
+        "security critique",
+        "concise high-signal review within free limits"
+      ],
+      "limits": "read ONLY routing/LEDGER.md plus one assigned micro-task; <3500 tokens total; emit REASSIGN_NEXT_ACCOUNT when near daily free limit",
+      "skill_tag": "[SKILL:claude]"
+    }
+  ],
+  "checkpoint_protocol": {
+    "on_free_limit_hit": "REASSIGN_NEXT_ACCOUNT <provider> <task-id>",
+    "ledger": "routing/LEDGER.md",
+    "account_pool": "routing/ACCOUNT_POOL.json"
+  }
+}

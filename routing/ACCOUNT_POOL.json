@@ -1,0 +1,21 @@
+{
+  "title": "AcidWurx Multi-Account Failover Pool",
+  "version": "0.1.0",
+  "updated_utc": "2026-11-15T14:26:26Z",
+  "policy": {
+    "secrets": "NEVER store credentials, tokens, emails, or account identifiers here or anywhere in this public repo. This file tracks availability only.",
+    "reassignment": "When an account hits its free chat limit, the AI must emit the checkpoint directive REASSIGN_NEXT_ACCOUNT <provider> <task-id>.",
+    "rotation": "The owner rotates accounts manually; agents request, never rotate."
+  },
+  "accounts": [
+    { "id": "google-acct-1", "provider": "google-ai-search", "status": "ACTIVE", "free_limit_state": "OK" },
+    { "id": "qwen-acct-1", "provider": "qwen", "status": "ACTIVE", "free_limit_state": "OK" },
+    { "id": "qwen-acct-2", "provider": "qwen", "status": "RESERVE", "free_limit_state": "OK" },
+    { "id": "meta-ai-acct-1", "provider": "meta-ai", "status": "ACTIVE", "free_limit_state": "OK" },
+    { "id": "kimi-acct-1", "provider": "kimi", "status": "ACTIVE", "free_limit_state": "OK" },
+    { "id": "kimi-acct-2", "provider": "kimi", "status": "RESERVE", "free_limit_state": "OK" },
+    { "id": "claude-acct-1", "provider": "claude", "status": "ACTIVE", "free_limit_state": "OK" },
+    { "id": "claude-acct-2", "provider": "claude", "status": "RESERVE", "free_limit_state": "OK" }
+  ],
+  "status_values": ["ACTIVE", "RESERVE", "COOLING_DOWN", "LIMIT_REACHED", "RETIRED"]
+}

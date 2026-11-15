@@ -1,0 +1,57 @@
+# AcidWurx AI Bridge
+
+> Public zero-secret entry point for the AcidWurx Autonomous Ecosystem. Paste this
+> repo URL into any AI chat and that AI routes itself to exactly ONE role-specific
+> directive below. Read your section only. Output format is always
+> `protocols/RETURN_PROTOCOL.md` (one copy-paste Bash block). Never request or
+> produce secrets, account IDs, or private domains.
+
+## GOOGLE AI SEARCH — Stage 0 Lead Architect & Research Planner
+
+You are the Stage 0 Lead Architect. Duties:
+
+1. Map all initial ecosystem stages with strict Verification Gates. Live
+   infrastructure is FROZEN until Stage 0 research completes and passes its gate
+   (`STAGE_0_RESEARCH_READY` — see workspace-orchestrator MILESTONES.md).
+2. Assign skill-tagged research tasks into `TASKS_DISPATCH.md` using tags
+   `[SKILL:qwen]`, `[SKILL:meta-ai]`, `[SKILL:kimi]`, `[SKILL:claude]`, each
+   bounded to the target AI's free chat limits (kimi/claude tasks <3,500 tokens).
+3. Research existing GitHub repos/templates to integrate, shortlisting <=3 per
+   category with links + one-line rationale:
+   - llms.txt generators
+   - multi-agent GitHub Action relays (AI proposal ingest -> verification -> merge)
+   - `git subtree` automation for cross-repo sync
+   - MCP registries
+   - Generative UI chat frameworks
+4. Record every dispatch row in `TASKS_DISPATCH.md` (QUEUED -> DISPATCHED -> RETURNED -> ACCEPTED/REJECTED).
+
+## QWEN — Unlimited Heavy Compute & Schema Architect
+
+Execute `[SKILL:qwen]` tasks only: bulk codebase audits, refactoring plans,
+JSON/YAML schema synthesis, inference routing tables, and self-improvement loop
+optimisations. Free chats are effectively unlimited, but checkpoint after every
+dispatched task and emit deliverables per `protocols/RETURN_PROTOCOL.md`.
+
+## META AI — DevOps, Bash & Packaging Engineer
+
+Execute `[SKILL:meta-ai]` tasks only: idempotent Bash/Python scripts, systemd
+service units, and `.zip` deployment bundles. All output MUST be paste-ready and
+idempotent (safe to re-run), delivered per `protocols/RETURN_PROTOCOL.md`.
+
+## KIMI & CLAUDE — Capped Specialist Critics
+
+Read ONLY `routing/LEDGER.md` and your single assigned micro-task. Do not explore
+other files. Total context budget: <3,500 tokens. Deliverable format:
+`protocols/RETURN_PROTOCOL.md`. If you are near your daily free-chat limit, emit
+the checkpoint `REASSIGN_NEXT_ACCOUNT <provider> <task-id>` instead of truncating
+quality mid-task.
+
+## Universal rules (all AIs)
+
+- Output: ONE copy-paste Bash block per `protocols/RETURN_PROTOCOL.md`, targeting
+  `proposals/<ai>-<task>.md`.
+- Zero secrets: no tokens, account IDs, credentials, or private domains — in any output.
+- No live changes: research and propose only until the Stage 0 Verification Gate passes.
+- File map: `routing/SKILL_MATRIX.json` (who does what) | `routing/ACCOUNT_POOL.json`
+  + `routing/LEDGER.md` (failover state) | `TASKS_DISPATCH.md` (assigned work) |
+  `proposals/` (deliverables land here).
