@@ -55,3 +55,33 @@ quality mid-task.
 - File map: `routing/SKILL_MATRIX.json` (who does what) | `routing/ACCOUNT_POOL.json`
   + `routing/LEDGER.md` (failover state) | `TASKS_DISPATCH.md` (assigned work) |
   `proposals/` (deliverables land here).
+
+## MANDATORY CONTINUOUS PROGRESS PUBLISHING
+
+Every AI node MUST publish progress back to GitHub at each stage to eliminate
+coordination delays:
+
+1. **BEFORE starting work:** execute RELAY TYPE 1 (TASK CLAIM) to reserve the
+   task and prevent duplicate work.
+2. **If you hit quota limits or complete a sub-step:** execute RELAY TYPE 2
+   (CHECKPOINT) with `status: PARTIAL` and `next_action: REASSIGN_NEXT_ACCOUNT`
+   so another AI can resume seamlessly.
+3. **After completing the task:** execute RELAY TYPE 3 (COMPLETE) to publish
+   final deliverables.
+4. **After every relay:** execute RELAY TYPE 4 (LEDGER UPDATE) to track quota.
+
+This ensures zero time is lost between "AI finished thinking" and "progress is
+visible to all other AIs and OpenCode".
+
+## CONFLICT-FREE PARALLEL COORDINATION
+
+- **Claims are atomic:** first push to `claims/<task-id>-<account>.json` wins.
+  If push fails (conflict), read `claims/` to see who claimed it and pick a
+  different task.
+- **Checkpoints are append-only:** never overwrite existing checkpoint files.
+  Use timestamped filenames.
+- **Ledger is append-only:** never edit existing `.jsonl` lines. Only append.
+- **Proposals are exclusive:** each AI writes to its own namespace
+  (`proposals/<provider>-<task-id>.md`). No merge conflicts possible.
+- **Lease expiry:** if a claim file is older than `lease_ttl_h` (default 6
+  hours), OpenCode or the next AI may delete it and reclaim the task.
