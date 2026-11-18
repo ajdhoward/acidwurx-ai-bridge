@@ -6,6 +6,72 @@
 > `protocols/RETURN_PROTOCOL.md` (one copy-paste Bash block). Never request or
 > produce secrets, account IDs, or private domains.
 
+## HOW TO CONTRIBUTE (Universal Entry Protocol)
+
+When you receive this URL:
+1. Identify your provider/model and capabilities.
+2. Read `routing/SKILL_MATRIX.json` to find tasks matching your skills.
+3. Check `routing/LEDGER.md` for your account's remaining capacity.
+4. Claim ONE task from `TASKS_DISPATCH.md` that fits your budget.
+5. Execute within declared token ceilings.
+6. Return a single copy-paste Bash block per `protocols/RETURN_PROTOCOL.md`.
+
+## CURRENT PRIORITY: INFERENCE & MCP OPTIMIZATION (Directive 2026-11-18)
+
+Active milestone: `M1-OPTIMIZATION` (see workspace-orchestrator TASK_QUEUE.json
+v2.0 + MASTER_BLUEPRINT.json). Governance note: CURRENT_STATE remains
+STAGE_0_RESEARCH_READY — all Priority 1-3 tasks below are audit/research/
+blueprint work; applied live changes unlock at STAGE_1_FOUNDATION only.
+
+**Priority 1 tasks (start here):**
+- `OPT-001` [SKILL:opencode-local] Audit and optimize OpenCode inference routing
+- `OPT-002` [SKILL:google-ai-search] Discover and integrate free MCP servers for coding
+- `OPT-003` [SKILL:claude] Research + design ToS-compliant multi-account inference strategies
+
+**Priority 2 tasks (after optimization):**
+- `PROJ-001` … `PROJ-010` [SKILL:qwen] Blueprint generation for the 10 focus
+  projects from MASTER_BLUEPRINT.json (workspace-orchestrator, opencode-vault,
+  acidwurx-ai-bridge, cloudflare-dashboard, omniroute-cf, acidwurx-nexus-telemetry,
+  agent-hpc-conduit, personal-os, uk-home-ops, trevorcare)
+
+**Priority 3 tasks (after blueprints):**
+- `AUTO-001` [SKILL:meta-ai] GitHub Actions for code quality gates
+
+### Task claiming protocol (before starting work)
+
+```bash
+cd "${BRIDGE_DIR:-$HOME/acidwurx-ai-bridge}" && git pull --rebase --autostash && mkdir -p claims && cat << 'AI_RELAY_EOF' > claims/TASKID-ACCOUNT.json
+{
+  "task_id": "OPT-001",
+  "account": "<your-account-id>",
+  "provider": "<your-provider>",
+  "claimed_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "lease_ttl_h": 6
+}
+AI_RELAY_EOF
+git add claims && git commit -m "claim(OPT-001): <account>" && git push
+```
+
+### Return protocol (after completing work)
+
+```bash
+cd "${BRIDGE_DIR:-$HOME/acidwurx-ai-bridge}" && git pull --rebase --autostash && mkdir -p proposals && cat << 'AI_RELAY_EOF' > proposals/PROVIDER-TASKID.md
+---
+task_id: OPT-001
+provider: <provider>
+account_slot: <account-id>
+status: COMPLETE
+tokens_in_est: 0
+tokens_out_est: 0
+quota_state: AVAILABLE
+next_action: CONTINUE
+confidence: 0-10
+---
+<findings, code, schemas — Markdown data only>
+AI_RELAY_EOF
+git add proposals && rm -f claims/TASKID-ACCOUNT.json && git commit -m "relay(PROVIDER): OPT-001 complete" && git push
+```
+
 ## GOOGLE AI SEARCH — Stage 0 Lead Architect & Research Planner
 
 You are the Stage 0 Lead Architect. Duties:
@@ -55,6 +121,16 @@ quality mid-task.
 - File map: `routing/SKILL_MATRIX.json` (who does what) | `routing/ACCOUNT_POOL.json`
   + `routing/LEDGER.md` (failover state) | `TASKS_DISPATCH.md` (assigned work) |
   `proposals/` (deliverables land here).
+
+## COORDINATION RULES (Directive 2026-11-18)
+
+- **Zero secrets** in this public repo.
+- **Single-block terminal relays** only.
+- **Continuous progress publishing** via claims/checkpoints/proposals.
+- **Never block** on a single provider — fallback chains are active
+  (`routing/ACCOUNT_POOL.json` + `routing/LEDGER.md`).
+- **OpenCode executes** all verified tasks via
+  `workspace-orchestrator/scripts/execute-tasks.sh` (honours OVERRIDE.md).
 
 ## MANDATORY CONTINUOUS PROGRESS PUBLISHING
 
